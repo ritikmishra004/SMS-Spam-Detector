@@ -1,0 +1,15 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+penv/
+
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Mac files
+.DS_Store
