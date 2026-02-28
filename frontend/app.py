@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pickle
 import nltk
@@ -8,6 +9,11 @@ from nltk.corpus import stopwords
 import string
 from nltk.stem.porter import PorterStemmer
 ps = PorterStemmer()
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = os.path.join(BASE_DIR, "artifacts", "model.pkl")
+vectorizer_path = os.path.join(BASE_DIR, "artifacts", "vectorizer.pkl")
+
 
 def transform_text(text):
     text = text.lower()
@@ -33,9 +39,8 @@ def transform_text(text):
     
     return " ".join(y)
 
-tfidf = pickle.load(open("/Users/ritikmishra/Desktop/ML_projects/sms-spam-detection/artifacts/vectorizer.pkl","rb"))
-model = pickle.load(open("/Users/ritikmishra/Desktop/ML_projects/sms-spam-detection/artifacts/model.pkl","rb"))
-
+model = pickle.load(open(model_path, "rb"))
+tfidf = pickle.load(open(vectorizer_path, "rb"))
 st.title("SMS Spam Classifier")
 
 input_sms = st.text_area("Enter the message")
